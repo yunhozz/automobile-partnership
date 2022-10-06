@@ -1,9 +1,11 @@
-package com.automobilepartnership.common.exception;
+package com.automobilepartnership.common;
 
 import com.automobilepartnership.api.dto.Response;
-import com.automobilepartnership.common.ErrorCode;
 import com.automobilepartnership.common.dto.ErrorResponseDto;
 import com.automobilepartnership.common.dto.NotValidResponseDto;
+import com.automobilepartnership.common.exception.EmailDuplicateException;
+import com.automobilepartnership.common.exception.MemberNotFoundException;
+import com.automobilepartnership.common.exception.PasswordMismatchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -22,14 +24,14 @@ public class GlobalExceptionHandler {
     public Response handleException(Exception e) {
         log.error("handleException", e);
         ErrorResponseDto error = new ErrorResponseDto(ErrorCode.NOT_FOUND);
-        return Response.failure(HttpStatus.NOT_FOUND, -1000, error);
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
 
     @ExceptionHandler(RuntimeException.class)
     public Response handleRuntimeException(RuntimeException e) {
         log.error("handleRuntimeException", e);
         ErrorResponseDto error = new ErrorResponseDto(ErrorCode.INTER_SERVER_ERROR);
-        return Response.failure(HttpStatus.INTERNAL_SERVER_ERROR, -1000, error);
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -48,6 +50,27 @@ public class GlobalExceptionHandler {
             notValidResponseDtoList.add(notValid);
         }
         ErrorResponseDto error = new ErrorResponseDto(ErrorCode.NOT_VALID, notValidResponseDtoList);
-        return Response.failure(HttpStatus.BAD_REQUEST, -1000, error);
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(MemberNotFoundException.class)
+    public Response handleMemberNotFoundException(MemberNotFoundException e) {
+        log.error("handleMemberNotFoundException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(EmailDuplicateException.class)
+    public Response handleEmailDuplicateException(EmailDuplicateException e) {
+        log.error("handleEmailDuplicateException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(PasswordMismatchException.class)
+    public Response handlePasswordMismatchException(PasswordMismatchException e) {
+        log.error("handlePasswordMismatchException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
 }
