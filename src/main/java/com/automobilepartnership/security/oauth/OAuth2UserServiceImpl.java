@@ -2,6 +2,7 @@ package com.automobilepartnership.security.oauth;
 
 import com.automobilepartnership.domain.member.persistence.Member;
 import com.automobilepartnership.domain.member.persistence.MemberRepository;
+import com.automobilepartnership.domain.member.persistence.Role;
 import com.automobilepartnership.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -30,7 +31,7 @@ public class OAuth2UserServiceImpl implements OAuth2UserService<OAuth2UserReques
         OAuthProvider oAuthProvider = OAuthProvider.of(registrationId, userNameAttributeName, attributes);
         Member member = saveOrUpdate(oAuthProvider, registrationId);
 
-        return new UserPrincipal(member);
+        return new UserPrincipal(member, registrationId, attributes);
     }
 
     private Member saveOrUpdate(OAuthProvider oAuthProvider, String registrationId) {
@@ -45,11 +46,11 @@ public class OAuth2UserServiceImpl implements OAuth2UserService<OAuth2UserReques
                     .age(0)
                     .imageUrl(oAuthProvider.getImageUrl())
                     .provider(registrationId)
+                    .role(Role.GUEST)
                     .build();
             memberRepository.save(member);
         } else {
-            member = optionalMember.get();
-            member.update(oAuthProvider.getName(), oAuthProvider.getImageUrl());
+            member = optionalMember.get().update(oAuthProvider.getName(), oAuthProvider.getImageUrl());
         }
         return member;
     }

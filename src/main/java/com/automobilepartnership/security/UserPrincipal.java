@@ -21,18 +21,30 @@ public class UserPrincipal implements UserDetails, OAuth2User {
     private final String password;
     private final String name;
     private final int age;
-    private final String provider;
     private final Role role;
+    private String provider;
     private Map<String, Object> attributes;
 
+    // UserDetailsService
     public UserPrincipal(Member member) {
         id = member.getId();
         email = member.getEmail();
         password = member.getPassword();
         name = member.getName();
         age = member.getAge();
-        provider = member.getProvider();
         role = member.getRole();
+    }
+
+    // OAuth2UserServiceImpl
+    public UserPrincipal(Member member, String provider, Map<String, Object> attributes) {
+        id = member.getId();
+        email = member.getEmail();
+        password = member.getPassword();
+        name = member.getName();
+        age = member.getAge();
+        role = member.getRole();
+        this.provider = provider;
+        this.attributes = attributes;
     }
 
     @Override
