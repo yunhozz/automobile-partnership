@@ -1,8 +1,8 @@
 package com.automobilepartnership.domain.member.service;
 
 import com.automobilepartnership.common.ErrorCode;
+import com.automobilepartnership.common.exception.AuthCodeNotFoundException;
 import com.automobilepartnership.common.exception.CodeMismatchException;
-import com.automobilepartnership.common.exception.MemberNotFoundException;
 import com.automobilepartnership.domain.member.persistence.AuthenticationCode;
 import com.automobilepartnership.domain.member.persistence.AuthenticationCodeRepository;
 import com.automobilepartnership.domain.member.persistence.Member;
@@ -16,6 +16,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 @Service
@@ -26,12 +27,13 @@ public class MailService {
     private final MemberRepository memberRepository;
     private final JavaMailSender javaMailSender;
 
+    private final static Long EMAIL_CODE_EXPIRATION_TIME = 5L; // 5분 후 만료
+
     @Transactional
-    public void sendMail(String email) {
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
+    public void sendMailToUser(Long userId) {
+        Member member = memberRepository.getReferenceById(userId);
         String code = createCode();
-        AuthenticationCode authenticationCode = new AuthenticationCode(member, code);
+        AuthenticationCode authenticationCode = new AuthenticationCode(member, code, LocalDateTime.now().plusMinutes(EMAIL_CODE_EXPIRATION_TIME));
         authenticationCodeRepository.save(authenticationCode);
 
         MimeMessage message = javaMailSender.createMimeMessage();
@@ -51,7 +53,7 @@ public class MailService {
 
         try {
             message.setFrom(new InternetAddress("qkrdbsgh1121@naver.com"));
-            message.setRecipients(Message.RecipientType.TO, email);
+            message.setRecipients(Message.RecipientType.TO, member.getEmail());
             message.setSubject("회원가입 인증 메일입니다.");
             message.setText(msg, "UTF-8", "html");
         } catch (MessagingException e) {
@@ -62,8 +64,8 @@ public class MailService {
     @Transactional
     public void verifyCode(Long userId, String code) {
         Member member = memberRepository.getReferenceById(userId);
-        AuthenticationCode authenticationCode = authenticationCodeRepository.findByMember(member)
-                .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
+        AuthenticationCode authenticationCode = authenticationCodeRepository.findByMemberAndExpireDateAfter(member, LocalDateTime.now())
+                .orElseThrow(() -> new AuthCodeNotFoundException(ErrorCode.AUTH_CODE_NOT_FOUND));
 
         if (!authenticationCode.getCode().equals(code)) {
             throw new CodeMismatchException(ErrorCode.CODE_MISMATCH);

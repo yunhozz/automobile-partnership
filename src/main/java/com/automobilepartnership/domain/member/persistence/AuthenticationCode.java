@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -30,11 +31,14 @@ public class AuthenticationCode extends BaseTime {
     @Column(length = 8)
     private String code;
 
-    private boolean isVerified;
+    private LocalDateTime expireDate; // 만료 시간
 
-    public AuthenticationCode(Member member, String code) {
+    private boolean isVerified; // 검증 여부
+
+    public AuthenticationCode(Member member, String code, LocalDateTime expireDate) {
         this.member = member;
         this.code = code;
+        this.expireDate = expireDate;
     }
 
     public void verify() {
