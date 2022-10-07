@@ -8,6 +8,7 @@ public enum ErrorCode {
     // global
     NOT_FOUND(404, "PAGE NOT FOUND"),
     INTER_SERVER_ERROR(500, "INTER SERVER ERROR"),
+    ACCESS_DENIED(401, "권한이 없습니다."),
     NOT_VALID(400, "입력값이 올바르지 않습니다."),
 
     // member

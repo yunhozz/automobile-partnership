@@ -11,6 +11,7 @@ import com.automobilepartnership.common.exception.MemberNotFoundException;
 import com.automobilepartnership.common.exception.PasswordMismatchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,6 +35,13 @@ public class GlobalExceptionHandler {
     public Response handleRuntimeException(RuntimeException e) {
         log.error("handleRuntimeException", e);
         ErrorResponseDto error = new ErrorResponseDto(ErrorCode.INTER_SERVER_ERROR);
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public Response handleAccessDeniedException(AccessDeniedException e) {
+        log.error("handleAccessDeniedException", e);
+        ErrorResponseDto error = new ErrorResponseDto(ErrorCode.ACCESS_DENIED);
         return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
 
