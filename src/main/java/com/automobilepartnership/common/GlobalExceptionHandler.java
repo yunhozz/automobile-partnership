@@ -3,7 +3,10 @@ package com.automobilepartnership.common;
 import com.automobilepartnership.api.dto.Response;
 import com.automobilepartnership.common.dto.ErrorResponseDto;
 import com.automobilepartnership.common.dto.NotValidResponseDto;
+import com.automobilepartnership.common.exception.AuthCodeNotFoundException;
+import com.automobilepartnership.common.exception.CodeMismatchException;
 import com.automobilepartnership.common.exception.EmailDuplicateException;
+import com.automobilepartnership.common.exception.EmailNotFoundException;
 import com.automobilepartnership.common.exception.MemberNotFoundException;
 import com.automobilepartnership.common.exception.PasswordMismatchException;
 import lombok.extern.slf4j.Slf4j;
@@ -67,9 +70,30 @@ public class GlobalExceptionHandler {
         return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
 
+    @ExceptionHandler(EmailNotFoundException.class)
+    public Response handleEmailNotFoundException(EmailNotFoundException e) {
+        log.error("handleEmailNotFoundException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
     @ExceptionHandler(PasswordMismatchException.class)
     public Response handlePasswordMismatchException(PasswordMismatchException e) {
         log.error("handlePasswordMismatchException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(AuthCodeNotFoundException.class)
+    public Response handleAuthCodeNotFoundException(AuthCodeNotFoundException e) {
+        log.error("handleAuthCodeNotFoundException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(CodeMismatchException.class)
+    public Response handleCodeMismatchException(CodeMismatchException e) {
+        log.error("handleCodeMismatchException", e);
         ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
         return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
