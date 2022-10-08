@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/api/mail/**").hasRole("ROLE_GUEST")
                 .anyRequest().permitAll();
 
         security

@@ -5,7 +5,6 @@ import com.automobilepartnership.domain.member.service.MailService;
 import com.automobilepartnership.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +19,12 @@ public class MailController {
 
     private final MailService mailService;
 
-    @Secured("ROLE_GUEST")
     @PostMapping("/send")
     public Response sendEmailCode(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         mailService.sendMailToUser(userPrincipal.getId());
         return Response.success(HttpStatus.CREATED);
     }
 
-    @Secured("ROLE_GUEST")
     @PostMapping("/verify")
     public Response verifyCode(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestParam String code) {
         if (!StringUtils.hasText(code)) {
