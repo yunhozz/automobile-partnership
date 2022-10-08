@@ -8,6 +8,7 @@ import com.automobilepartnership.common.exception.CodeMismatchException;
 import com.automobilepartnership.common.exception.EmailDuplicateException;
 import com.automobilepartnership.common.exception.EmailNotFoundException;
 import com.automobilepartnership.common.exception.MemberNotFoundException;
+import com.automobilepartnership.common.exception.NotificationNotFoundException;
 import com.automobilepartnership.common.exception.PasswordMismatchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -102,6 +103,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CodeMismatchException.class)
     public Response handleCodeMismatchException(CodeMismatchException e) {
         log.error("handleCodeMismatchException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(NotificationNotFoundException.class)
+    public Response handleNotificationNotFoundException(NotificationNotFoundException e) {
+        log.error("handleNotificationNotFoundException", e);
         ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
         return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
