@@ -1,6 +1,7 @@
 package com.automobilepartnership.domain.member.service;
 
 import com.automobilepartnership.api.dto.member.MemberRequestDto;
+import com.automobilepartnership.common.BaseInfo;
 import com.automobilepartnership.common.ErrorCode;
 import com.automobilepartnership.common.exception.EmailDuplicateException;
 import com.automobilepartnership.common.exception.MemberNotFoundException;
@@ -64,11 +65,12 @@ public class MemberService {
     }
 
     private Member createMember(MemberRequestDto memberRequestDto) {
+        BaseInfo baseInfo = new BaseInfo(memberRequestDto.getName(), memberRequestDto.getAge(), memberRequestDto.getResidence());
+
         return Member.builder()
                 .email(memberRequestDto.getEmail())
                 .password(encoder.encode(memberRequestDto.getPassword()))
-                .name(memberRequestDto.getName())
-                .age(memberRequestDto.getAge())
+                .baseInfo(baseInfo)
                 .imageUrl(memberRequestDto.getImageUrl())
                 .provider(null)
                 .role(Role.GUEST)

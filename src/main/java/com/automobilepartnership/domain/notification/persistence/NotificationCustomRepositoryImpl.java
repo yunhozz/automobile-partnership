@@ -31,7 +31,7 @@ public class NotificationCustomRepositoryImpl implements NotificationCustomRepos
                         notification.redirectUrl,
                         notification.createdDate,
                         sender.id,
-                        sender.name,
+                        sender.baseInfo.name,
                         sender.imageUrl
                 ))
                 .from(notification)

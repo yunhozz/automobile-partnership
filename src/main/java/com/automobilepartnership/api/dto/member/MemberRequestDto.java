@@ -26,5 +26,8 @@ public class MemberRequestDto {
     @NotNull(message = "나이를 입력해주세요")
     private Integer age;
 
+    @NotBlank(message = "사는 곳을 입력해주세요")
+    private String residence;
+
     private String imageUrl;
 }

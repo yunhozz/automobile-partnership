@@ -1,5 +1,6 @@
 package com.automobilepartnership.security.oauth;
 
+import com.automobilepartnership.common.BaseInfo;
 import com.automobilepartnership.domain.member.persistence.Member;
 import com.automobilepartnership.domain.member.persistence.MemberRepository;
 import com.automobilepartnership.domain.member.persistence.Role;
@@ -41,18 +42,19 @@ public class OAuth2UserServiceImpl implements OAuth2UserService<OAuth2UserReques
         Member member;
 
         if (optionalMember.isEmpty()) {
+            BaseInfo baseInfo = new BaseInfo(oAuthProvider.getName(), 0, null);
             member = Member.builder()
                     .email(oAuthProvider.getEmail())
                     .password(null)
-                    .name(oAuthProvider.getName())
-                    .age(0)
+                    .baseInfo(baseInfo)
                     .imageUrl(oAuthProvider.getImageUrl())
                     .provider(registrationId)
                     .role(Role.GUEST)
                     .build();
+
             memberRepository.save(member);
         } else {
-            member = optionalMember.get().update(oAuthProvider.getName(), oAuthProvider.getImageUrl());
+            member = optionalMember.get().updateNameAndImage(oAuthProvider.getName(), oAuthProvider.getImageUrl());
         }
         return member;
     }

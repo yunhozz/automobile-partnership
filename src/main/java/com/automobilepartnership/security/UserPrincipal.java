@@ -30,8 +30,8 @@ public class UserPrincipal implements UserDetails, OAuth2User {
         id = member.getId();
         email = member.getEmail();
         password = member.getPassword();
-        name = member.getName();
-        age = member.getAge();
+        name = member.getBaseInfo().getName();
+        age = member.getBaseInfo().getAge();
         role = member.getRole();
     }
 
@@ -40,8 +40,8 @@ public class UserPrincipal implements UserDetails, OAuth2User {
         id = member.getId();
         email = member.getEmail();
         password = member.getPassword();
-        name = member.getName();
-        age = member.getAge();
+        name = member.getBaseInfo().getName();
+        age = member.getBaseInfo().getAge();
         role = member.getRole();
         this.provider = provider;
         this.attributes = attributes;
@@ -63,6 +63,11 @@ public class UserPrincipal implements UserDetails, OAuth2User {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -88,10 +93,5 @@ public class UserPrincipal implements UserDetails, OAuth2User {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public String getName() {
-        return null;
     }
 }

@@ -20,8 +20,8 @@ public class MemberResponseDto {
         id = member.getId();
         email = member.getEmail();
         password = member.getPassword();
-        name = member.getName();
-        age = member.getAge();
+        name = member.getBaseInfo().getName();
+        age = member.getBaseInfo().getAge();
         provider = member.getProvider();
         role = member.getRole().getValue();
     }

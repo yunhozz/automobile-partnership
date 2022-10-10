@@ -1,5 +1,6 @@
 package com.automobilepartnership.domain.member.persistence;
 
+import com.automobilepartnership.common.BaseInfo;
 import com.automobilepartnership.common.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,11 +30,8 @@ public class Member extends BaseTime {
 
     private String password;
 
-    @Column(length = 10)
-    private String name;
-
-    @Column(columnDefinition = "tinyint")
-    private int age;
+    @Embedded
+    private BaseInfo baseInfo;
 
     private String imageUrl;
 
@@ -43,21 +42,24 @@ public class Member extends BaseTime {
     private Role role; // ADMIN, USER, GUEST
 
     @Builder
-    private Member(String email, String password, String name, int age, String imageUrl, String provider, Role role) {
+    private Member(String email, String password, BaseInfo baseInfo, String imageUrl, String provider, Role role) {
         this.email = email;
         this.password = password;
-        this.name = name;
-        this.age = age;
+        this.baseInfo = baseInfo;
         this.imageUrl = imageUrl;
         this.provider = provider;
         this.role = role;
     }
 
-    public Member update(String name, String imageUrl) {
-        this.name = name;
+    public Member updateNameAndImage(String name, String imageUrl) {
+        baseInfo.updateName(name);
         this.imageUrl = imageUrl;
 
         return this;
+    }
+
+    public void updateInfo(String name, int age, String residence) {
+        baseInfo.updateInfo(name, age, residence);
     }
 
     public void updatePassword(String password) {
@@ -68,6 +70,8 @@ public class Member extends BaseTime {
     public void promote() {
         if (role == Role.GUEST) {
             role = Role.USER;
+        } else {
+            throw new IllegalStateException("이미 인증 완료한 회원입니다.");
         }
     }
 }
