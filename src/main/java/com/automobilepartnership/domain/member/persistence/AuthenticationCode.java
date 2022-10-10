@@ -45,6 +45,8 @@ public class AuthenticationCode extends BaseTime {
         if (!isVerified) {
             isVerified = true;
             member.promote();
+        } else {
+            throw new IllegalStateException("이미 검증이 완료된 토큰입니다.");
         }
     }
 }
