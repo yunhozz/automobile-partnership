@@ -28,7 +28,7 @@ public class NotificationService {
     private final EmitterRepository emitterRepository;
 
     @Transactional
-    public Long saveNotification(Long senderId, Long receiverId, NotificationRequestDto notificationRequestDto) {
+    public Long sendToClientAndSave(Long senderId, Long receiverId, NotificationRequestDto notificationRequestDto) {
         Member sender = memberRepository.getReferenceById(senderId);
         Member receiver = memberRepository.findById(receiverId)
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
@@ -49,7 +49,7 @@ public class NotificationService {
         return notificationRepository.save(notification).getId();
     }
 
-    public void deleteNotification(Long notificationId) {
+    public void delete(Long notificationId) {
         Notification notification = findNotification(notificationId);
         notificationRepository.delete(notification);
     }

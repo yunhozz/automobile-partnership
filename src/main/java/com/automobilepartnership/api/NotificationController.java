@@ -56,12 +56,12 @@ public class NotificationController {
 
     @PostMapping
     public Response sendNotification(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestParam String receiverId, @Valid @RequestBody NotificationRequestDto notificationRequestDto) {
-        return Response.success(HttpStatus.CREATED, notificationService.saveNotification(userPrincipal.getId(), Long.valueOf(receiverId), notificationRequestDto));
+        return Response.success(HttpStatus.CREATED, notificationService.sendToClientAndSave(userPrincipal.getId(), Long.valueOf(receiverId), notificationRequestDto));
     }
 
     @DeleteMapping
     public Response deleteNotification(@RequestParam String id) {
-        notificationService.deleteNotification(Long.valueOf(id));
+        notificationService.delete(Long.valueOf(id));
         return Response.success(HttpStatus.NO_CONTENT);
     }
 }
