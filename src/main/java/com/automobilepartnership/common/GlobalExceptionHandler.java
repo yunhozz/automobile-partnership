@@ -3,6 +3,7 @@ package com.automobilepartnership.common;
 import com.automobilepartnership.api.dto.Response;
 import com.automobilepartnership.common.dto.ErrorResponseDto;
 import com.automobilepartnership.common.dto.NotValidResponseDto;
+import com.automobilepartnership.common.exception.AlreadyAllocatedException;
 import com.automobilepartnership.common.exception.AuthCodeNotFoundException;
 import com.automobilepartnership.common.exception.CodeMismatchException;
 import com.automobilepartnership.common.exception.CounselNotFoundException;
@@ -119,6 +120,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CounselNotFoundException.class)
     public Response handleCounselNotFoundException(CounselNotFoundException e) {
         log.error("handleCounselNotFoundException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(AlreadyAllocatedException.class)
+    public Response handleAlreadyAllocatedException(AlreadyAllocatedException e) {
+        log.error("handleAlreadyAllocatedException", e);
         ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
         return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }

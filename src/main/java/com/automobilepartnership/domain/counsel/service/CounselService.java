@@ -3,6 +3,7 @@ package com.automobilepartnership.domain.counsel.service;
 import com.automobilepartnership.api.dto.counsel.CounselRequestDto;
 import com.automobilepartnership.common.converter.CounselTypeConverter;
 import com.automobilepartnership.common.ErrorCode;
+import com.automobilepartnership.common.exception.AlreadyAllocatedException;
 import com.automobilepartnership.common.exception.CounselNotFoundException;
 import com.automobilepartnership.domain.counsel.dto.CounselResponseDto;
 import com.automobilepartnership.domain.counsel.persistence.Counsel;
@@ -46,9 +47,12 @@ public class CounselService {
         return new CounselResponseDto(counsel);
     }
 
-    // TODO : 상담사 배정 시 삭제 불가
     @Transactional
     public void delete(Long counselId) {
+        // 상담사가 이미 배정되어 있으면 삭제 불가
+        if (counselRepository.isEmployeeIdExist(counselId)) {
+            throw new AlreadyAllocatedException(ErrorCode.ALREADY_ALLOCATED);
+        }
         Counsel counsel = findCounsel(counselId);
         counselRepository.delete(counsel);
     }
