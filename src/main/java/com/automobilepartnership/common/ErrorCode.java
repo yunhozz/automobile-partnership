@@ -20,7 +20,13 @@ public enum ErrorCode {
     CODE_MISMATCH(400, "전송한 코드와 일치하지 않습니다."),
 
     // notification
-    NOTIFICATION_NOT_FOUND(400, "알림을 찾을 수 없습니다.");
+    NOTIFICATION_NOT_FOUND(400, "알림을 찾을 수 없습니다."),
+
+    // counsel
+    COUNSEL_NOT_FOUND(400, "상담 내역을 찾을 수 없습니다."),
+
+    // employee
+    EMPLOYEE_NOT_FOUND(400, "직원을 찾을 수 없습니다.");
 
     private final int code;
     private final String message;

@@ -5,8 +5,10 @@ import com.automobilepartnership.common.dto.ErrorResponseDto;
 import com.automobilepartnership.common.dto.NotValidResponseDto;
 import com.automobilepartnership.common.exception.AuthCodeNotFoundException;
 import com.automobilepartnership.common.exception.CodeMismatchException;
+import com.automobilepartnership.common.exception.CounselNotFoundException;
 import com.automobilepartnership.common.exception.EmailDuplicateException;
 import com.automobilepartnership.common.exception.EmailNotFoundException;
+import com.automobilepartnership.common.exception.EmployeeNotFoundException;
 import com.automobilepartnership.common.exception.MemberNotFoundException;
 import com.automobilepartnership.common.exception.NotificationNotFoundException;
 import com.automobilepartnership.common.exception.PasswordMismatchException;
@@ -110,6 +112,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotificationNotFoundException.class)
     public Response handleNotificationNotFoundException(NotificationNotFoundException e) {
         log.error("handleNotificationNotFoundException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(CounselNotFoundException.class)
+    public Response handleCounselNotFoundException(CounselNotFoundException e) {
+        log.error("handleCounselNotFoundException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(EmployeeNotFoundException.class)
+    public Response handleEmployeeNotFoundException(EmployeeNotFoundException e) {
+        log.error("handleEmployeeNotFoundException", e);
         ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
         return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
