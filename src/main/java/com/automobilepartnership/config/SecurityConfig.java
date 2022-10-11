@@ -41,6 +41,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/mail/**").hasRole("GUEST")
+                .antMatchers("/api/counsel/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest().permitAll();
 
         security
