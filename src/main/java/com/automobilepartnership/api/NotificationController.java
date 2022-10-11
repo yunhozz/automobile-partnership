@@ -49,7 +49,7 @@ public class NotificationController {
     }
 
     @PostMapping(value = "/connect", produces = "text/event-stream")
-    public Response connectWithUser(@RequestHeader(value = "last-event-id", defaultValue = "") String lastEventId, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public Response connectWithUser(@RequestHeader(value = "Last-Event-Id", defaultValue = "") String lastEventId, @AuthenticationPrincipal UserPrincipal userPrincipal) {
         connectService.connectWithUser(userPrincipal.getId(), lastEventId);
         return Response.success(HttpStatus.CREATED);
     }
