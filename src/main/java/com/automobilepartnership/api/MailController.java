@@ -26,7 +26,7 @@ public class MailController {
     }
 
     @PostMapping("/verify")
-    public Response verifyCode(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestParam String code) {
+    public Response verifyCode(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestParam(required = false) String code) {
         if (!StringUtils.hasText(code)) {
             return Response.failure(HttpStatus.BAD_REQUEST, -1000, "인증 코드를 입력해주세요.");
         }
