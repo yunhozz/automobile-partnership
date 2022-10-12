@@ -8,6 +8,8 @@ import com.automobilepartnership.common.exception.CounselNotFoundException;
 import com.automobilepartnership.domain.counsel.dto.CounselResponseDto;
 import com.automobilepartnership.domain.counsel.persistence.Counsel;
 import com.automobilepartnership.domain.counsel.persistence.CounselRepository;
+import com.automobilepartnership.domain.counsel.persistence.Image;
+import com.automobilepartnership.domain.counsel.persistence.ImageRepository;
 import com.automobilepartnership.domain.member.persistence.Member;
 import com.automobilepartnership.domain.member.persistence.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +24,11 @@ import java.util.stream.Collectors;
 public class CounselService {
 
     private final CounselRepository counselRepository;
+    private final ImageRepository imageRepository;
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long create(Long userId, CounselRequestDto counselRequestDto) {
+    public Long create(Long userId, List<Long> imageIds, CounselRequestDto counselRequestDto) {
         Member member = memberRepository.getReferenceById(userId);
         CounselTypeConverter converter = new CounselTypeConverter();
 
@@ -36,7 +39,14 @@ public class CounselService {
                 .detail(counselRequestDto.getDetail())
                 .build();
 
-        return counselRepository.save(counsel).getId();
+        counselRepository.save(counsel);
+
+        for (Long imageId : imageIds) {
+            Image image = imageRepository.getReferenceById(imageId);
+            image.uploadOnCounsel(String.valueOf(counsel.getId()));
+        }
+
+        return counsel.getId();
     }
 
     @Transactional

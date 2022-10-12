@@ -5,6 +5,7 @@ import com.automobilepartnership.api.dto.counsel.CounselRequestDto;
 import com.automobilepartnership.api.dto.counsel.UpdateRequestDto;
 import com.automobilepartnership.domain.counsel.persistence.CounselRepository;
 import com.automobilepartnership.domain.counsel.service.CounselService;
+import com.automobilepartnership.domain.counsel.service.ImageService;
 import com.automobilepartnership.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/counsel")
@@ -30,6 +32,7 @@ import java.io.IOException;
 public class CounselController {
 
     private final CounselService counselService;
+    private final ImageService imageService;
     private final CounselRepository counselRepository;
 
     @GetMapping("/{id}")
@@ -50,7 +53,7 @@ public class CounselController {
         return Response.success(HttpStatus.OK, counselRepository.searchPageWithKeyword(keyword, pageable));
     }
 
-    // TODO : 직원 회원가입 시 'USER' 권한 부여
+    // TODO : 권한 설정 ?
     @GetMapping("/list")
     public Response getCounselListByEmployee(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         return Response.success(HttpStatus.OK, counselService.findCounselDtoListByEmployee(String.valueOf(userPrincipal.getId())));
@@ -59,7 +62,8 @@ public class CounselController {
     @PostMapping
     public Response createCounsel(@AuthenticationPrincipal UserPrincipal userPrincipal, @Valid @RequestBody CounselRequestDto counselRequestDto,
                                   @RequestParam(required = false) MultipartFile[] files) throws IOException {
-        return Response.success(HttpStatus.CREATED, counselService.create(userPrincipal.getId(), counselRequestDto));
+        List<Long> imageIds = imageService.saveAndUpload(files);
+        return Response.success(HttpStatus.CREATED, counselService.create(userPrincipal.getId(), imageIds, counselRequestDto));
     }
 
     @PatchMapping
