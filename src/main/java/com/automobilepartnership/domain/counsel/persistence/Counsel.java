@@ -67,7 +67,7 @@ public class Counsel extends BaseTime {
         this.detail = detail;
     }
 
-    public void resolved(Employee employee) {
+    public void resolvedByEmployee(Employee employee) {
         if (!isResolved) {
             isResolved = true;
             employee.addCount(); // 상담 횟수 +1
