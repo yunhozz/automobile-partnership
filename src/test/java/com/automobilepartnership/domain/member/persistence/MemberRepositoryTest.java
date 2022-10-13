@@ -21,7 +21,6 @@ class MemberRepositoryTest {
         //given
         Member member = Member.builder()
                 .email("test@gmail.com")
-                .name("tester")
                 .build();
         memberRepository.save(member);
 

@@ -1,7 +1,7 @@
 package com.automobilepartnership.domain.member.service;
 
 import com.automobilepartnership.api.dto.member.MemberRequestDto;
-import com.automobilepartnership.common.exception.PasswordMismatchException;
+import com.automobilepartnership.domain.member.service.exception.PasswordMismatchException;
 import com.automobilepartnership.domain.member.persistence.Member;
 import com.automobilepartnership.domain.member.persistence.MemberRepository;
 import com.automobilepartnership.domain.member.persistence.RefreshToken;
@@ -37,7 +37,7 @@ class LoginServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        MemberRequestDto memberRequestDto = new MemberRequestDto("test@gmail.com", "123", "tester", 12, null);
+        MemberRequestDto memberRequestDto = new MemberRequestDto("test@gmail.com", "123", "tester", 12, "seoul", null);
         memberService.join(memberRequestDto);
     }
 

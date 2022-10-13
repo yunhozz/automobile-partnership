@@ -1,8 +1,8 @@
 package com.automobilepartnership.domain.member.service;
 
 import com.automobilepartnership.api.dto.member.MemberRequestDto;
-import com.automobilepartnership.common.exception.EmailDuplicateException;
-import com.automobilepartnership.common.exception.PasswordMismatchException;
+import com.automobilepartnership.domain.member.service.exception.EmailDuplicateException;
+import com.automobilepartnership.domain.member.service.exception.PasswordMismatchException;
 import com.automobilepartnership.domain.member.dto.MemberResponseDto;
 import com.automobilepartnership.domain.member.persistence.Member;
 import com.automobilepartnership.domain.member.persistence.MemberRepository;
@@ -32,7 +32,7 @@ class MemberServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        MemberRequestDto memberRequestDto = new MemberRequestDto("test@gmail.com", "123", "tester", 12, null);
+        MemberRequestDto memberRequestDto = new MemberRequestDto("test@gmail.com", "123", "tester", 12, "seoul", null);
         userId = memberService.join(memberRequestDto);
     }
 
@@ -46,8 +46,8 @@ class MemberServiceTest {
     @Test
     void joinFail() throws Exception {
         //given
-        MemberRequestDto memberRequestDto1 = new MemberRequestDto("test@gmail.com", "123", "tester1", 12, null);
-        MemberRequestDto memberRequestDto2 = new MemberRequestDto("test@gmail.com", "456", "tester2", 34, null);
+        MemberRequestDto memberRequestDto1 = new MemberRequestDto("test@gmail.com", "123", "tester1", 12, "seoul", null);
+        MemberRequestDto memberRequestDto2 = new MemberRequestDto("test@gmail.com", "456", "tester2", 34, "seoul", null);
 
         //when
         try {
@@ -111,9 +111,9 @@ class MemberServiceTest {
     @Test
     void findMemberDtoList() throws Exception {
         //given
-        MemberRequestDto memberRequestDto1 = new MemberRequestDto("test1@gmail.com", "123", "tester1", 12, null);
-        MemberRequestDto memberRequestDto2 = new MemberRequestDto("test2@gmail.com", "123", "tester2", 12, null);
-        MemberRequestDto memberRequestDto3 = new MemberRequestDto("test3@gmail.com", "123", "tester3", 12, null);
+        MemberRequestDto memberRequestDto1 = new MemberRequestDto("test1@gmail.com", "123", "tester1", 12, "seoul", null);
+        MemberRequestDto memberRequestDto2 = new MemberRequestDto("test2@gmail.com", "123", "tester2", 12, "seoul", null);
+        MemberRequestDto memberRequestDto3 = new MemberRequestDto("test3@gmail.com", "123", "tester3", 12, "seoul", null);
         memberService.join(memberRequestDto1);
         memberService.join(memberRequestDto2);
         memberService.join(memberRequestDto3);
