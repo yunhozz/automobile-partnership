@@ -2,13 +2,17 @@ package com.automobilepartnership.domain.counsel.persistence;
 
 import com.automobilepartnership.common.BaseTime;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -19,7 +23,9 @@ public class Image extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String counselId; // 상담 pk 값
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "counsel_id")
+    private Counsel counsel;
 
     private String originalName; // 기존 파일 이름
 
@@ -27,13 +33,11 @@ public class Image extends BaseTime {
 
     private String path; // 파일 경로
 
-    public Image(String originalName, String saveName, String path) {
+    @Builder
+    private Image(Counsel counsel, String originalName, String saveName, String path) {
+        this.counsel = counsel;
         this.originalName = originalName;
         this.saveName = saveName;
         this.path = path;
-    }
-
-    public void uploadOnCounsel(String counselId) {
-        this.counselId = counselId;
     }
 }

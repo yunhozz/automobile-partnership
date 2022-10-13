@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/counsel")
@@ -62,8 +61,10 @@ public class CounselController {
     @PostMapping
     public Response createCounsel(@AuthenticationPrincipal UserPrincipal userPrincipal, @Valid @RequestBody CounselRequestDto counselRequestDto,
                                   @RequestParam(required = false) MultipartFile[] files) throws IOException {
-        List<Long> imageIds = imageService.saveAndUpload(files);
-        return Response.success(HttpStatus.CREATED, counselService.create(userPrincipal.getId(), imageIds, counselRequestDto));
+        Long counselId = counselService.create(userPrincipal.getId(), counselRequestDto);
+        imageService.saveAndUpload(counselId, files);
+
+        return Response.success(HttpStatus.CREATED, counselId);
     }
 
     @PatchMapping

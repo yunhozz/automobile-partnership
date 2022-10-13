@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class ImageResponseDto {
 
     private Long id;
-    private String counselId;
+    private Long counselId;
     private String originalName;
     private String saveName;
     private String path;
@@ -19,7 +19,7 @@ public class ImageResponseDto {
 
     public ImageResponseDto(Image image) {
         id = image.getId();
-        counselId = image.getCounselId();
+        counselId = image.getCounsel().getId();
         originalName = image.getOriginalName();
         saveName = image.getSaveName();
         path = image.getPath();
