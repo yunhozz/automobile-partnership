@@ -27,7 +27,8 @@ public enum ErrorCode {
     ALREADY_ALLOCATED(400, "상담사가 이미 배정되어 있습니다."),
 
     // employee
-    EMPLOYEE_NOT_FOUND(400, "직원을 찾을 수 없습니다.");
+    EMPLOYEE_NOT_FOUND(400, "직원을 찾을 수 없습니다."),
+    EMPLOYEE_DIFFERENT(400, "배정된 직원과 다릅니다.");
 
     private final int code;
     private final String message;

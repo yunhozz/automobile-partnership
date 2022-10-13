@@ -3,16 +3,17 @@ package com.automobilepartnership.common;
 import com.automobilepartnership.api.dto.Response;
 import com.automobilepartnership.common.dto.ErrorResponseDto;
 import com.automobilepartnership.common.dto.NotValidResponseDto;
-import com.automobilepartnership.common.exception.AlreadyAllocatedException;
-import com.automobilepartnership.common.exception.AuthCodeNotFoundException;
-import com.automobilepartnership.common.exception.CodeMismatchException;
-import com.automobilepartnership.common.exception.CounselNotFoundException;
-import com.automobilepartnership.common.exception.EmailDuplicateException;
-import com.automobilepartnership.common.exception.EmailNotFoundException;
-import com.automobilepartnership.common.exception.EmployeeNotFoundException;
-import com.automobilepartnership.common.exception.MemberNotFoundException;
-import com.automobilepartnership.common.exception.NotificationNotFoundException;
-import com.automobilepartnership.common.exception.PasswordMismatchException;
+import com.automobilepartnership.domain.counsel.service.exception.AlreadyAllocatedException;
+import com.automobilepartnership.domain.counsel.service.exception.EmployeeDifferentException;
+import com.automobilepartnership.domain.member.service.exception.AuthCodeNotFoundException;
+import com.automobilepartnership.domain.member.service.exception.CodeMismatchException;
+import com.automobilepartnership.domain.counsel.service.exception.CounselNotFoundException;
+import com.automobilepartnership.domain.member.service.exception.EmailDuplicateException;
+import com.automobilepartnership.domain.member.service.exception.EmailNotFoundException;
+import com.automobilepartnership.domain.counsel.service.exception.EmployeeNotFoundException;
+import com.automobilepartnership.domain.member.service.exception.MemberNotFoundException;
+import com.automobilepartnership.domain.notification.service.exception.NotificationNotFoundException;
+import com.automobilepartnership.domain.member.service.exception.PasswordMismatchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -134,6 +135,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmployeeNotFoundException.class)
     public Response handleEmployeeNotFoundException(EmployeeNotFoundException e) {
         log.error("handleEmployeeNotFoundException", e);
+        ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
+        return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
+    }
+
+    @ExceptionHandler(EmployeeDifferentException.class)
+    public Response handleEmployeeDifferentException(EmployeeDifferentException e) {
+        log.error("handleEmployeeDifferentException", e);
         ErrorResponseDto error = new ErrorResponseDto(e.getErrorCode());
         return Response.failure(HttpStatus.valueOf(error.getCode()), -1000, error);
     }
