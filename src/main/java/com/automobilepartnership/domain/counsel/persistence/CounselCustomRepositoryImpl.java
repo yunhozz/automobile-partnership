@@ -1,7 +1,5 @@
 package com.automobilepartnership.domain.counsel.persistence;
 
-import com.automobilepartnership.api.dto.counsel.SortType;
-import com.automobilepartnership.common.converter.SortTypeConverter;
 import com.automobilepartnership.domain.counsel.dto.CounselQueryDto;
 import com.automobilepartnership.domain.counsel.dto.QCounselQueryDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -26,9 +24,6 @@ public class CounselCustomRepositoryImpl implements CounselCustomRepository {
 
     @Override
     public Page<CounselQueryDto> sortPage(String sortTypeDesc, Pageable pageable) {
-        SortTypeConverter converter = new SortTypeConverter();
-        SortType sortType = converter.convertToEntityAttribute(sortTypeDesc);
-
         List<CounselQueryDto> counselList = queryFactory
                 .select(new QCounselQueryDto(
                         counsel.id,
@@ -41,7 +36,7 @@ public class CounselCustomRepositoryImpl implements CounselCustomRepository {
                 ))
                 .from(counsel)
                 .join(counsel.member, member)
-                .where(bySortType(sortType))
+                .where(bySortType(sortTypeDesc))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(counsel.createdDate.desc())
@@ -83,12 +78,12 @@ public class CounselCustomRepositoryImpl implements CounselCustomRepository {
         return new PageImpl<>(counselList, pageable, count);
     }
 
-    private BooleanExpression bySortType(SortType sortType) {
-        switch (sortType) {
-            case RESOLVED:
+    private BooleanExpression bySortType(String sortTypeDesc) {
+        switch (sortTypeDesc) {
+            case "해결":
                 return counsel.isResolved.isTrue();
 
-            case NOT_RESOLVED:
+            case "미해결":
                 return counsel.isResolved.isFalse();
 
             default:
