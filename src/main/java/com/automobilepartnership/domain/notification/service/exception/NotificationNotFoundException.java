@@ -1,4 +1,4 @@
-package com.automobilepartnership.common.exception;
+package com.automobilepartnership.domain.notification.service.exception;
 
 import com.automobilepartnership.common.ErrorCode;
 import lombok.Getter;
