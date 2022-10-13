@@ -2,8 +2,9 @@ package com.automobilepartnership.domain.counsel.service;
 
 import com.automobilepartnership.api.dto.employee.EmployeeRequestDto;
 import com.automobilepartnership.common.ErrorCode;
-import com.automobilepartnership.common.exception.CounselNotFoundException;
-import com.automobilepartnership.common.exception.EmployeeNotFoundException;
+import com.automobilepartnership.domain.counsel.service.exception.CounselNotFoundException;
+import com.automobilepartnership.domain.counsel.service.exception.EmployeeDifferentException;
+import com.automobilepartnership.domain.counsel.service.exception.EmployeeNotFoundException;
 import com.automobilepartnership.domain.counsel.dto.EmployeeResponseDto;
 import com.automobilepartnership.domain.counsel.persistence.Counsel;
 import com.automobilepartnership.domain.counsel.persistence.CounselRepository;
@@ -44,6 +45,10 @@ public class EmployeeService {
         Counsel counsel = counselRepository.findById(counselId)
                 .orElseThrow(() -> new CounselNotFoundException(ErrorCode.COUNSEL_NOT_FOUND));
 
+        // employee id 값이 null 이거나 값이 다른 경우
+        if (counsel.getEmployeeId() == null || !counsel.getEmployeeId().equals(String.valueOf(employee.getId()))) {
+            throw new EmployeeDifferentException(ErrorCode.EMPLOYEE_DIFFERENT);
+        }
         counsel.resolvedByEmployee(employee);
     }
 

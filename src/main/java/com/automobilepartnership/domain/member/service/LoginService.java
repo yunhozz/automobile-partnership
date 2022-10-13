@@ -1,8 +1,8 @@
 package com.automobilepartnership.domain.member.service;
 
 import com.automobilepartnership.common.ErrorCode;
-import com.automobilepartnership.common.exception.MemberNotFoundException;
-import com.automobilepartnership.common.exception.PasswordMismatchException;
+import com.automobilepartnership.domain.member.service.exception.MemberNotFoundException;
+import com.automobilepartnership.domain.member.service.exception.PasswordMismatchException;
 import com.automobilepartnership.domain.member.persistence.Member;
 import com.automobilepartnership.domain.member.persistence.MemberRepository;
 import com.automobilepartnership.domain.member.persistence.RefreshToken;

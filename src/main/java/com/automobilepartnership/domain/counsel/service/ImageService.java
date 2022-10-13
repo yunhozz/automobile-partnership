@@ -1,5 +1,9 @@
 package com.automobilepartnership.domain.counsel.service;
 
+import com.automobilepartnership.common.ErrorCode;
+import com.automobilepartnership.domain.counsel.service.exception.CounselNotFoundException;
+import com.automobilepartnership.domain.counsel.persistence.Counsel;
+import com.automobilepartnership.domain.counsel.persistence.CounselRepository;
 import com.automobilepartnership.domain.counsel.persistence.Image;
 import com.automobilepartnership.domain.counsel.persistence.ImageRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -19,6 +21,7 @@ import java.util.UUID;
 public class ImageService {
 
     private final ImageRepository imageRepository;
+    private final CounselRepository counselRepository;
 
     @Value("${spring.servlet.multipart.location}")
     private String fileDir;

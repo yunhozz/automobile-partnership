@@ -3,13 +3,11 @@ package com.automobilepartnership.domain.counsel.service;
 import com.automobilepartnership.api.dto.counsel.CounselRequestDto;
 import com.automobilepartnership.common.converter.CounselTypeConverter;
 import com.automobilepartnership.common.ErrorCode;
-import com.automobilepartnership.common.exception.AlreadyAllocatedException;
-import com.automobilepartnership.common.exception.CounselNotFoundException;
+import com.automobilepartnership.domain.counsel.service.exception.AlreadyAllocatedException;
+import com.automobilepartnership.domain.counsel.service.exception.CounselNotFoundException;
 import com.automobilepartnership.domain.counsel.dto.CounselResponseDto;
 import com.automobilepartnership.domain.counsel.persistence.Counsel;
 import com.automobilepartnership.domain.counsel.persistence.CounselRepository;
-import com.automobilepartnership.domain.counsel.persistence.Image;
-import com.automobilepartnership.domain.counsel.persistence.ImageRepository;
 import com.automobilepartnership.domain.member.persistence.Member;
 import com.automobilepartnership.domain.member.persistence.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +22,6 @@ import java.util.stream.Collectors;
 public class CounselService {
 
     private final CounselRepository counselRepository;
-    private final ImageRepository imageRepository;
     private final MemberRepository memberRepository;
 
     @Transactional

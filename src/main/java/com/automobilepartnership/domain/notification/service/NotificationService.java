@@ -2,8 +2,8 @@ package com.automobilepartnership.domain.notification.service;
 
 import com.automobilepartnership.api.dto.notification.NotificationRequestDto;
 import com.automobilepartnership.common.ErrorCode;
-import com.automobilepartnership.common.exception.MemberNotFoundException;
-import com.automobilepartnership.common.exception.NotificationNotFoundException;
+import com.automobilepartnership.domain.member.service.exception.MemberNotFoundException;
+import com.automobilepartnership.domain.notification.service.exception.NotificationNotFoundException;
 import com.automobilepartnership.domain.member.persistence.Member;
 import com.automobilepartnership.domain.member.persistence.MemberRepository;
 import com.automobilepartnership.domain.notification.dto.NotificationResponseDto;

@@ -1,8 +1,8 @@
 package com.automobilepartnership.domain.member.service;
 
 import com.automobilepartnership.common.ErrorCode;
-import com.automobilepartnership.common.exception.AuthCodeNotFoundException;
-import com.automobilepartnership.common.exception.CodeMismatchException;
+import com.automobilepartnership.domain.member.service.exception.AuthCodeNotFoundException;
+import com.automobilepartnership.domain.member.service.exception.CodeMismatchException;
 import com.automobilepartnership.domain.member.persistence.AuthenticationCode;
 import com.automobilepartnership.domain.member.persistence.AuthenticationCodeRepository;
 import com.automobilepartnership.domain.member.persistence.Member;
