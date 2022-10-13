@@ -27,8 +27,9 @@ public class ImageService {
     private String fileDir;
 
     @Transactional
-    public List<Long> saveAndUpload(MultipartFile[] files) throws IOException {
-        List<Long> imageIds = new ArrayList<>();
+    public void saveAndUpload(Long counselId, MultipartFile[] files) throws IOException {
+        Counsel counsel = counselRepository.findById(counselId)
+                .orElseThrow(() -> new CounselNotFoundException(ErrorCode.COUNSEL_NOT_FOUND));
 
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
@@ -38,14 +39,16 @@ public class ImageService {
 
                 String saveName = uuid + extension;
                 String path = fileDir + saveName;
-                Image image = new Image(originalName, saveName, path);
+                Image image = Image.builder()
+                        .counsel(counsel)
+                        .originalName(originalName)
+                        .saveName(saveName)
+                        .path(path)
+                        .build();
 
                 file.transferTo(new File(saveName));
-                Long imageId = imageRepository.save(image).getId();
-                imageIds.add(imageId);
+                imageRepository.save(image);
             }
         }
-
-        return imageIds;
     }
 }

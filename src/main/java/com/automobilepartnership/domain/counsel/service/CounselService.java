@@ -25,7 +25,7 @@ public class CounselService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long create(Long userId, List<Long> imageIds, CounselRequestDto counselRequestDto) {
+    public Long create(Long userId, CounselRequestDto counselRequestDto) {
         Member member = memberRepository.getReferenceById(userId);
         CounselTypeConverter converter = new CounselTypeConverter();
 
@@ -36,14 +36,7 @@ public class CounselService {
                 .detail(counselRequestDto.getDetail())
                 .build();
 
-        counselRepository.save(counsel);
-
-        for (Long imageId : imageIds) {
-            Image image = imageRepository.getReferenceById(imageId);
-            image.uploadOnCounsel(String.valueOf(counsel.getId()));
-        }
-
-        return counsel.getId();
+        return counselRepository.save(counsel).getId();
     }
 
     @Transactional
