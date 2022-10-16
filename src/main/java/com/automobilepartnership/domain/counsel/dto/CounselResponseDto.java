@@ -12,7 +12,7 @@ public class CounselResponseDto {
 
     private Long id;
     private Long userId;
-    private String employeeId;
+    private Long employeeId;
     private String type;
     private String title;
     private String detail;

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class RefreshTokenResponseDto {
 
     private Long id;
-    private String userId;
+    private Long userId;
     private String token;
     private LocalDateTime createdDate;
 
