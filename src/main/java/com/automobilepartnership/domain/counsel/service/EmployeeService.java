@@ -46,7 +46,7 @@ public class EmployeeService {
                 .orElseThrow(() -> new CounselNotFoundException(ErrorCode.COUNSEL_NOT_FOUND));
 
         // employee id 값이 null 이거나 값이 다른 경우
-        if (counsel.getEmployeeId() == null || !counsel.getEmployeeId().equals(String.valueOf(employee.getId()))) {
+        if (counsel.getEmployeeId() == null || !counsel.getEmployeeId().equals(employeeId)) {
             throw new EmployeeDifferentException(ErrorCode.EMPLOYEE_DIFFERENT);
         }
         counsel.resolvedByEmployee(employee);

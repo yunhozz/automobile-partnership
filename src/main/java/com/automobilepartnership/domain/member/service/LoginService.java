@@ -32,7 +32,7 @@ public class LoginService {
             throw new PasswordMismatchException(ErrorCode.PASSWORD_MISMATCH);
         }
         TokenResponseDto tokenDto = jwtProvider.createTokenDto(member.getEmail(), member.getRole().getKey());
-        RefreshToken refreshToken = new RefreshToken(String.valueOf(member.getId()), tokenDto.getRefreshToken());
+        RefreshToken refreshToken = new RefreshToken(member.getId(), tokenDto.getRefreshToken());
         refreshTokenRepository.save(refreshToken);
 
         return tokenDto;

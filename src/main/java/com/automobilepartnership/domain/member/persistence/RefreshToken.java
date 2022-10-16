@@ -19,11 +19,11 @@ public class RefreshToken extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userId;
+    private Long userId;
 
     private String token;
 
-    public RefreshToken(String userId, String token) {
+    public RefreshToken(Long userId, String token) {
         this.userId = userId;
         this.token = token;
     }

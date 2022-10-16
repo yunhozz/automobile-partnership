@@ -31,7 +31,7 @@ public class Counsel extends BaseTime {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private String employeeId; // Employee PK 값
+    private Long employeeId; // Employee PK 값
 
     @Convert(converter = CounselTypeConverter.class)
     private CounselType counselType;
@@ -54,7 +54,7 @@ public class Counsel extends BaseTime {
 
     public void allocateEmployee(Employee employee) {
         if (employeeId == null) {
-            employeeId = String.valueOf(employee.getId());
+            employeeId = employee.getId();
         } else {
             throw new IllegalStateException("이미 상담사가 배정되어 있습니다.");
         }
