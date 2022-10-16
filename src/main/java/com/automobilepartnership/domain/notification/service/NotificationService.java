@@ -49,17 +49,20 @@ public class NotificationService {
         return notificationRepository.save(notification).getId();
     }
 
+    @Transactional
     public void delete(Long notificationId) {
         Notification notification = findNotification(notificationId);
         notificationRepository.delete(notification);
     }
 
+    @Transactional(readOnly = true)
     public List<NotificationResponseDto> findNotificationDtoList() {
         return notificationRepository.findAll().stream()
                 .map(NotificationResponseDto::new)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     private Notification findNotification(Long notificationId) {
         return notificationRepository.findById(notificationId)
                 .orElseThrow(() -> new NotificationNotFoundException(ErrorCode.NOTIFICATION_NOT_FOUND));

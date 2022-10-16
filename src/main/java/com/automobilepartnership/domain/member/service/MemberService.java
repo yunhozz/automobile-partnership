@@ -54,10 +54,12 @@ public class MemberService {
         memberRepository.delete(member); // TODO : soft delete?
     }
 
+    @Transactional(readOnly = true)
     public MemberResponseDto findMemberDto(Long userId) {
         return new MemberResponseDto(findMember(userId));
     }
 
+    @Transactional(readOnly = true)
     public List<MemberResponseDto> findMemberDtoList() {
         return memberRepository.findAll().stream()
                 .map(MemberResponseDto::new)
@@ -77,6 +79,7 @@ public class MemberService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     private Member findMember(Long userId) {
         return memberRepository.findById(userId)
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));

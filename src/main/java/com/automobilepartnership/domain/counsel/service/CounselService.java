@@ -57,16 +57,19 @@ public class CounselService {
         counselRepository.delete(counsel);
     }
 
+    @Transactional(readOnly = true)
     public CounselResponseDto findCounselDto(Long counselId) {
         return new CounselResponseDto(findCounsel(counselId));
     }
 
+    @Transactional(readOnly = true)
     public List<CounselResponseDto> findCounselDtoListByEmployee(String employeeId) {
         return counselRepository.findByEmployeeId(employeeId).stream()
                 .map(CounselResponseDto::new)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     private Counsel findCounsel(Long counselId) {
         return counselRepository.findById(counselId)
                 .orElseThrow(() -> new CounselNotFoundException(ErrorCode.COUNSEL_NOT_FOUND));

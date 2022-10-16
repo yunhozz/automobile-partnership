@@ -58,16 +58,19 @@ public class EmployeeService {
         employeeRepository.delete(employee);
     }
 
+    @Transactional(readOnly = true)
     public EmployeeResponseDto findEmployeeDto(Long employeeId) {
         return new EmployeeResponseDto(findEmployee(employeeId));
     }
 
+    @Transactional(readOnly = true)
     public List<EmployeeResponseDto> findEmployeeDtoList() {
         return employeeRepository.findAll().stream()
                 .map(EmployeeResponseDto::new)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     private Employee findEmployee(Long employeeId) {
         return employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new EmployeeNotFoundException(ErrorCode.EMPLOYEE_NOT_FOUND));
