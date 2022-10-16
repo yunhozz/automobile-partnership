@@ -1,6 +1,6 @@
 package com.automobilepartnership.domain.counsel.dto;
 
-import com.automobilepartnership.domain.counsel.persistence.Image;
+import com.automobilepartnership.domain.counsel.persistence.entity.Image;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

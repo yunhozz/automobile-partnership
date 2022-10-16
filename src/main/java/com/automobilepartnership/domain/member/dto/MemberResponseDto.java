@@ -1,6 +1,6 @@
 package com.automobilepartnership.domain.member.dto;
 
-import com.automobilepartnership.domain.member.persistence.Member;
+import com.automobilepartnership.domain.member.persistence.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

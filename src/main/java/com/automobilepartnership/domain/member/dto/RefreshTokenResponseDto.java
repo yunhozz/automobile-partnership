@@ -1,6 +1,6 @@
 package com.automobilepartnership.domain.member.dto;
 
-import com.automobilepartnership.domain.member.persistence.RefreshToken;
+import com.automobilepartnership.domain.member.persistence.entity.RefreshToken;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

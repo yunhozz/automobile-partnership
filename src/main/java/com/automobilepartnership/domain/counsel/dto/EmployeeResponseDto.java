@@ -1,6 +1,6 @@
 package com.automobilepartnership.domain.counsel.dto;
 
-import com.automobilepartnership.domain.counsel.persistence.Employee;
+import com.automobilepartnership.domain.counsel.persistence.entity.Employee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

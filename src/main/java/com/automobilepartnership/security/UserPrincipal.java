@@ -1,7 +1,7 @@
 package com.automobilepartnership.security;
 
-import com.automobilepartnership.domain.member.persistence.Member;
-import com.automobilepartnership.domain.member.persistence.Role;
+import com.automobilepartnership.domain.member.persistence.entity.Member;
+import com.automobilepartnership.domain.member.persistence.entity.Role;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,7 +18,6 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 
     private final Long id;
     private final String email;
-    private final String password;
     private final String name;
     private final int age;
     private final Role role;
@@ -29,7 +28,6 @@ public class UserPrincipal implements UserDetails, OAuth2User {
     public UserPrincipal(Member member) {
         id = member.getId();
         email = member.getEmail();
-        password = member.getPassword();
         name = member.getBaseInfo().getName();
         age = member.getBaseInfo().getAge();
         role = member.getRole();
@@ -39,7 +37,6 @@ public class UserPrincipal implements UserDetails, OAuth2User {
     public UserPrincipal(Member member, String provider, Map<String, Object> attributes) {
         id = member.getId();
         email = member.getEmail();
-        password = member.getPassword();
         name = member.getBaseInfo().getName();
         age = member.getBaseInfo().getAge();
         role = member.getRole();

@@ -1,9 +1,9 @@
 package com.automobilepartnership.security.oauth;
 
 import com.automobilepartnership.common.BaseInfo;
-import com.automobilepartnership.domain.member.persistence.Member;
-import com.automobilepartnership.domain.member.persistence.MemberRepository;
-import com.automobilepartnership.domain.member.persistence.Role;
+import com.automobilepartnership.domain.member.persistence.entity.Member;
+import com.automobilepartnership.domain.member.persistence.repository.MemberRepository;
+import com.automobilepartnership.domain.member.persistence.entity.Role;
 import com.automobilepartnership.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

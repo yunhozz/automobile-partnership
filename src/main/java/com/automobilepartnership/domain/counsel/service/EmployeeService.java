@@ -6,10 +6,10 @@ import com.automobilepartnership.domain.counsel.service.exception.CounselNotFoun
 import com.automobilepartnership.domain.counsel.service.exception.EmployeeDifferentException;
 import com.automobilepartnership.domain.counsel.service.exception.EmployeeNotFoundException;
 import com.automobilepartnership.domain.counsel.dto.EmployeeResponseDto;
-import com.automobilepartnership.domain.counsel.persistence.Counsel;
-import com.automobilepartnership.domain.counsel.persistence.CounselRepository;
-import com.automobilepartnership.domain.counsel.persistence.Employee;
-import com.automobilepartnership.domain.counsel.persistence.EmployeeRepository;
+import com.automobilepartnership.domain.counsel.persistence.entity.Counsel;
+import com.automobilepartnership.domain.counsel.persistence.repository.CounselRepository;
+import com.automobilepartnership.domain.counsel.persistence.entity.Employee;
+import com.automobilepartnership.domain.counsel.persistence.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

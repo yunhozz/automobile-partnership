@@ -1,6 +1,6 @@
 package com.automobilepartnership.domain.notification.service;
 
-import com.automobilepartnership.domain.notification.persistence.EmitterRepository;
+import com.automobilepartnership.domain.notification.persistence.repository.EmitterRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

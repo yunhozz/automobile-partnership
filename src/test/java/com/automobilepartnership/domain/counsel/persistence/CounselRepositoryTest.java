@@ -1,8 +1,13 @@
 package com.automobilepartnership.domain.counsel.persistence;
 
 import com.automobilepartnership.domain.counsel.dto.CounselQueryDto;
-import com.automobilepartnership.domain.member.persistence.Member;
-import com.automobilepartnership.domain.member.persistence.MemberRepository;
+import com.automobilepartnership.domain.counsel.persistence.entity.Counsel;
+import com.automobilepartnership.domain.counsel.persistence.entity.CounselType;
+import com.automobilepartnership.domain.counsel.persistence.entity.Employee;
+import com.automobilepartnership.domain.counsel.persistence.repository.CounselRepository;
+import com.automobilepartnership.domain.counsel.persistence.repository.EmployeeRepository;
+import com.automobilepartnership.domain.member.persistence.entity.Member;
+import com.automobilepartnership.domain.member.persistence.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.automobilepartnership.domain.notification.persistence;
 
 import com.automobilepartnership.common.BaseTime;
-import com.automobilepartnership.domain.member.persistence.Member;
+import com.automobilepartnership.domain.member.persistence.entity.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

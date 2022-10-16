@@ -2,10 +2,10 @@ package com.automobilepartnership.domain.member.service;
 
 import com.automobilepartnership.api.dto.member.MemberRequestDto;
 import com.automobilepartnership.domain.member.service.exception.PasswordMismatchException;
-import com.automobilepartnership.domain.member.persistence.Member;
-import com.automobilepartnership.domain.member.persistence.MemberRepository;
-import com.automobilepartnership.domain.member.persistence.RefreshToken;
-import com.automobilepartnership.domain.member.persistence.RefreshTokenRepository;
+import com.automobilepartnership.domain.member.persistence.entity.Member;
+import com.automobilepartnership.domain.member.persistence.repository.MemberRepository;
+import com.automobilepartnership.domain.member.persistence.entity.RefreshToken;
+import com.automobilepartnership.domain.member.persistence.repository.RefreshTokenRepository;
 import com.automobilepartnership.security.jwt.TokenResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

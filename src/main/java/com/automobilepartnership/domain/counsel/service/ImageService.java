@@ -2,10 +2,10 @@ package com.automobilepartnership.domain.counsel.service;
 
 import com.automobilepartnership.common.ErrorCode;
 import com.automobilepartnership.domain.counsel.service.exception.CounselNotFoundException;
-import com.automobilepartnership.domain.counsel.persistence.Counsel;
-import com.automobilepartnership.domain.counsel.persistence.CounselRepository;
-import com.automobilepartnership.domain.counsel.persistence.Image;
-import com.automobilepartnership.domain.counsel.persistence.ImageRepository;
+import com.automobilepartnership.domain.counsel.persistence.entity.Counsel;
+import com.automobilepartnership.domain.counsel.persistence.repository.CounselRepository;
+import com.automobilepartnership.domain.counsel.persistence.entity.Image;
+import com.automobilepartnership.domain.counsel.persistence.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

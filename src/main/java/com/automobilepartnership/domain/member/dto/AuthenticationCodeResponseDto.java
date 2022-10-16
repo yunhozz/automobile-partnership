@@ -1,6 +1,6 @@
 package com.automobilepartnership.domain.member.dto;
 
-import com.automobilepartnership.domain.member.persistence.AuthenticationCode;
+import com.automobilepartnership.domain.member.persistence.entity.AuthenticationCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

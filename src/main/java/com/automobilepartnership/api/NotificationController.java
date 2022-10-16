@@ -2,7 +2,7 @@ package com.automobilepartnership.api;
 
 import com.automobilepartnership.api.dto.Response;
 import com.automobilepartnership.api.dto.notification.NotificationRequestDto;
-import com.automobilepartnership.domain.notification.persistence.NotificationRepository;
+import com.automobilepartnership.domain.notification.persistence.repository.NotificationRepository;
 import com.automobilepartnership.domain.notification.service.ConnectService;
 import com.automobilepartnership.domain.notification.service.NotificationService;
 import com.automobilepartnership.security.UserPrincipal;

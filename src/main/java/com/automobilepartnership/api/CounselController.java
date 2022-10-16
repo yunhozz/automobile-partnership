@@ -3,7 +3,7 @@ package com.automobilepartnership.api;
 import com.automobilepartnership.api.dto.Response;
 import com.automobilepartnership.api.dto.counsel.CounselRequestDto;
 import com.automobilepartnership.api.dto.counsel.UpdateRequestDto;
-import com.automobilepartnership.domain.counsel.persistence.CounselRepository;
+import com.automobilepartnership.domain.counsel.persistence.repository.CounselRepository;
 import com.automobilepartnership.domain.counsel.service.CounselService;
 import com.automobilepartnership.domain.counsel.service.ImageService;
 import com.automobilepartnership.security.UserPrincipal;

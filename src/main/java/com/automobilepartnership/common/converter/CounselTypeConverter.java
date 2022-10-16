@@ -1,6 +1,6 @@
 package com.automobilepartnership.common.converter;
 
-import com.automobilepartnership.domain.counsel.persistence.CounselType;
+import com.automobilepartnership.domain.counsel.persistence.entity.CounselType;
 
 import javax.persistence.AttributeConverter;
 

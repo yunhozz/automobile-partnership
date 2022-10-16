@@ -1,5 +1,7 @@
 package com.automobilepartnership.domain.member.persistence;
 
+import com.automobilepartnership.domain.member.persistence.entity.Member;
+import com.automobilepartnership.domain.member.persistence.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

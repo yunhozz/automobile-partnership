@@ -7,9 +7,9 @@ import com.automobilepartnership.domain.member.service.exception.EmailDuplicateE
 import com.automobilepartnership.domain.member.service.exception.MemberNotFoundException;
 import com.automobilepartnership.domain.member.service.exception.PasswordMismatchException;
 import com.automobilepartnership.domain.member.dto.MemberResponseDto;
-import com.automobilepartnership.domain.member.persistence.Member;
-import com.automobilepartnership.domain.member.persistence.MemberRepository;
-import com.automobilepartnership.domain.member.persistence.Role;
+import com.automobilepartnership.domain.member.persistence.entity.Member;
+import com.automobilepartnership.domain.member.persistence.repository.MemberRepository;
+import com.automobilepartnership.domain.member.persistence.entity.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
