@@ -3,6 +3,7 @@ package com.automobilepartnership.domain.counsel.service;
 import com.automobilepartnership.api.dto.counsel.CounselRequestDto;
 import com.automobilepartnership.common.converter.CounselTypeConverter;
 import com.automobilepartnership.common.ErrorCode;
+import com.automobilepartnership.domain.counsel.persistence.ImageRepository;
 import com.automobilepartnership.domain.counsel.service.exception.AlreadyAllocatedException;
 import com.automobilepartnership.domain.counsel.service.exception.CounselNotFoundException;
 import com.automobilepartnership.domain.counsel.dto.CounselResponseDto;
@@ -23,6 +24,7 @@ public class CounselService {
 
     private final CounselRepository counselRepository;
     private final MemberRepository memberRepository;
+    private final ImageRepository imageRepository;
 
     @Transactional
     public Long create(Long userId, CounselRequestDto counselRequestDto) {
@@ -54,6 +56,7 @@ public class CounselService {
             throw new AlreadyAllocatedException(ErrorCode.ALREADY_ALLOCATED);
         }
         Counsel counsel = findCounsel(counselId);
+        imageRepository.findByCounsel(counsel).forEach(imageRepository::delete); // 각 image 엔티티의 counsel 필드 삭제
         counselRepository.delete(counsel);
     }
 
