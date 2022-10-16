@@ -1,8 +1,8 @@
-package com.automobilepartnership.domain.counsel.persistence;
+package com.automobilepartnership.domain.counsel.persistence.entity;
 
 import com.automobilepartnership.common.BaseTime;
 import com.automobilepartnership.common.converter.CounselTypeConverter;
-import com.automobilepartnership.domain.member.persistence.Member;
+import com.automobilepartnership.domain.member.persistence.entity.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

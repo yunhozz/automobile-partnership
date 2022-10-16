@@ -1,4 +1,4 @@
-package com.automobilepartnership.domain.notification.persistence;
+package com.automobilepartnership.domain.notification.persistence.repository;
 
 import com.automobilepartnership.domain.member.persistence.QMember;
 import com.automobilepartnership.domain.notification.dto.NotificationQueryDto;

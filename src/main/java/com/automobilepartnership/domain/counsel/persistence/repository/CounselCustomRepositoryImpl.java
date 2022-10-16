@@ -1,4 +1,4 @@
-package com.automobilepartnership.domain.counsel.persistence;
+package com.automobilepartnership.domain.counsel.persistence.repository;
 
 import com.automobilepartnership.domain.counsel.dto.CounselQueryDto;
 import com.automobilepartnership.domain.counsel.dto.QCounselQueryDto;

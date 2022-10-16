@@ -1,5 +1,6 @@
-package com.automobilepartnership.domain.notification.persistence;
+package com.automobilepartnership.domain.notification.persistence.repository;
 
+import com.automobilepartnership.domain.notification.persistence.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

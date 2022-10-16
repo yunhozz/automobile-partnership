@@ -1,4 +1,4 @@
-package com.automobilepartnership.domain.member.persistence;
+package com.automobilepartnership.domain.member.persistence.entity;
 
 import com.automobilepartnership.common.BaseInfo;
 import com.automobilepartnership.common.BaseTime;

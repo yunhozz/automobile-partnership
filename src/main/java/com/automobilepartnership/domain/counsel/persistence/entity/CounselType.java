@@ -1,4 +1,4 @@
-package com.automobilepartnership.domain.counsel.persistence;
+package com.automobilepartnership.domain.counsel.persistence.entity;
 
 import lombok.Getter;
 

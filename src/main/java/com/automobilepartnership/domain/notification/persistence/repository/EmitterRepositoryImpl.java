@@ -1,4 +1,4 @@
-package com.automobilepartnership.domain.notification.persistence;
+package com.automobilepartnership.domain.notification.persistence.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
