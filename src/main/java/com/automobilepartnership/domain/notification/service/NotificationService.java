@@ -62,7 +62,6 @@ public class NotificationService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
     private Notification findNotification(Long notificationId) {
         return notificationRepository.findById(notificationId)
                 .orElseThrow(() -> new NotificationNotFoundException(ErrorCode.NOTIFICATION_NOT_FOUND));

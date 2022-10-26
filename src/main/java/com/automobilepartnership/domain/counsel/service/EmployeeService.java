@@ -70,7 +70,6 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
     private Employee findEmployee(Long employeeId) {
         return employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new EmployeeNotFoundException(ErrorCode.EMPLOYEE_NOT_FOUND));

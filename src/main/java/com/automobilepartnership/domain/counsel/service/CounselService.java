@@ -72,7 +72,6 @@ public class CounselService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
     private Counsel findCounsel(Long counselId) {
         return counselRepository.findById(counselId)
                 .orElseThrow(() -> new CounselNotFoundException(ErrorCode.COUNSEL_NOT_FOUND));

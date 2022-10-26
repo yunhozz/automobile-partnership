@@ -79,7 +79,6 @@ public class MemberService {
                 .build();
     }
 
-    @Transactional(readOnly = true)
     private Member findMember(Long userId) {
         return memberRepository.findById(userId)
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
